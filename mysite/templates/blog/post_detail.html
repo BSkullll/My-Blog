@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+
+{% block title_block %}
+	<title>Post Detail</title>
+{% endblock %}
+
+{% block body_block %}
+	<div class="post">
+		{% if post.published_date %}
+			<p class="date">{{post.published_date}}</p>
+		{% endif %}
+			{% if request.user.is_authenticated %}
+				<a class="btn btn-danger" href="{% url 'post_edit' pk=post.pk %}">Edit</a>
+				<h2>{{ post.title }}</h2>
+				<p>{{ post.text|linebreaksbr }}</p>
+				<hr>
+			{% else %}
+				<h2>{{ post.title }}</h2>
+				<p>{{ post.text|linebreaksbr }}</p>
+				<hr>
+			{% endif %}
+	</div>
+{% endblock %}
